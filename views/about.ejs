@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs</title>
-</head>
+<%- include('./partials/head.ejs') %>
 <body>
-    <nav>
-        <div class="site-title">
-            <a href="/"><h1>Blogs</h1></a>
-            <p>A Site</p>
-        </div>
-        <ul>
-            <li><a href="/">Blogs</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/blogs/create">New Blog</a></li>
-        </ul>
-    </nav>
+
+    <%- include('./partials/nav.ejs') %>
 
     <div class="about content">
         <h2>About Us</h2>
@@ -25,6 +11,8 @@
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, at. Quasi totam obcaecati quaerat cumque dicta quo aperiam nam, quos necessitatibus tempore rem repellendus quod hic corporis voluptatem cum blanditiis illo numquam velit voluptatum ullam sint quia! Maxime quis dicta, fugit sed dolorum nemo harum facilis dolorem quae officiis numquam!</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quia minima recusandae veritatis neque totam, laboriosam tenetur commodi sunt iure alias. Pariatur tempore reiciendis quasi distinctio ipsam eveniet omnis consectetur consequatur minus, nesciunt consequuntur provident itaque esse similique illum repudiandae iure qui nemo ipsa architecto rerum! Tenetur enim inventore possimus?</p>
     </div>
+
+    <%- include('./partials/footer.ejs') %>
     
 </body>
 </html>
