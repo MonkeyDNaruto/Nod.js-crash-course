@@ -21,43 +21,8 @@ const db= mongoose.connect(dbURI,  { useNewUrlParser: true, useUnifiedTopology: 
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-
-app.get('/add-blog', (req, res) => {
-    const blog = new Blog({
-        title: 'new blog',
-        snippet: "about my new blog",
-        body: 'more about my new blog'
-    });
-
-    blog.save()
-     .then((result) => {
-         res.send(result)
-     })
-     .catch((err) => {
-         console.log(err);
-     });
-})
-
-app.get('/all-blogs', (req, res) => {
-    Blog.find()
-     .then((result) => {
-         res.send(result);
-     })
-     .catch((err) => {
-         console.log(err);
-     });
-})
-
-app.get('/single-blog', (req, res) => {
-    Blog.findById()
-     .then((result) => {
-         res.send(result);
-     })
-     .catch((err) => {
-         console.log(err);
-     });
-})
 
 app.use((req, res, next) => {
     console.log("New request made:");
@@ -84,7 +49,29 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about', { title : 'About'})
-});
+}); 
+
+app.get('/', (req, res) => {
+    Blog.find().sort({ createdAt: -1 })
+     .then((result) => {
+         res.render('index', { title: 'All Blogs', blogs: result })
+     })
+     .catch((err) => {
+         console.log(err);
+     })
+})
+
+app.post('/', (req, res) => {
+    const blog = new Blog(req.body);
+
+    blog.save()
+      .then((result) => {
+          res.redirect('/blogs');
+      })
+      .catch((err) => {
+          console.log(err);
+      })
+})
 
 app.get('/blogs/create', (req, res) => {
     res.render('create', { title : 'Create new blog'})
