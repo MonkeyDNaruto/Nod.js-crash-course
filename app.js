@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog.js');
 const res = require('express/lib/response');
+const { param } = require('express/lib/request');
+const { render } = require('express/lib/response');
 
 const app = express();
 
@@ -98,6 +100,17 @@ app.post('/blogs', (req, res) => {
             console.log(err);
         })
 });
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+    Blog.findById(id)
+      .then(result => {
+          res.render('details', { blog: result, title: 'Blog Details' })
+      })
+      .catch(err => {
+          console.log(err);
+      })
+})
 
 app.use((req, res) => {
     res.status(404).render('404', { title: '404' })
